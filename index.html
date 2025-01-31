@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pendant Product Page</title>
+    <style>
+      /* Global Styles */
+      body {
+        background-color: #fcf8f2;
+        font-family: "Arial", sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+
+      /* Navbar Styles */
+      .navbar-top {
+        background-color: #f3ede3;
+        text-align: center;
+        font-size: 0.875rem;
+        padding: 0.5rem 0;
+      }
+
+      .navbar {
+        background-color: white;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        padding: 1rem;
+      }
+
+      .navbar-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .navbar h1 {
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin: 0;
+      }
+
+      .navbar ul {
+        display: none;
+      }
+
+      .navbar .cart-button img {
+        width: 24px;
+      }
+
+      /* Product Section Styles */
+      .product-section {
+        max-width: 1200px;
+        margin: 2rem auto;
+        padding: 0 1rem;
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+      }
+
+      .product-left {
+        display: flex;
+        flex-direction: column-reverse;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .main-image {
+        width: 100%;
+        max-width: 400px;
+        border-radius: 0.5rem;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .thumbs {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+      }
+
+      .thumb {
+        width: 4rem;
+        cursor: pointer;
+        border: 2px solid transparent;
+        border-radius: 0.5rem;
+        transition: border 0.3s ease;
+      }
+
+      .thumb:hover {
+        border-color: #555;
+      }
+
+      .product-right {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .product-title {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #553100;
+        margin: 0;
+      }
+
+      .rating {
+        color: #c67100;
+        font-size: 1.125rem;
+        margin: 0;
+      }
+
+      .product-details {
+        display: flex;
+        align-items: center;
+        font-weight: 600;
+        color: #553100;
+        margin: 0;
+      }
+
+      .product-details img {
+        margin-right: 0.5rem;
+        width: 24px;
+        height: 24px;
+      }
+
+      .product-description {
+        color: #553100;
+        font-size: 1rem;
+        margin: 0;
+      }
+
+      .color-selection p {
+        font-weight: 600;
+        margin: 0 0 0.5rem 0;
+      }
+
+      .color-options {
+        display: flex;
+        gap: 1rem;
+      }
+
+      .color-button {
+        width: 2rem;
+        height: 2rem;
+        border-radius: 50%;
+        border: 2px solid transparent;
+        cursor: pointer;
+      }
+
+      .color-button:hover {
+        border-color: black;
+      }
+
+      .price {
+        font-size: 1.25rem;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }
+
+      .old-price {
+        color: #4a4a4a;
+        text-decoration: line-through;
+      }
+
+      .discount-tag {
+        background-color: #553100;
+        color: white;
+        padding: 0.25rem 0.5rem;
+        font-size: 0.875rem;
+      }
+
+      .buy-now-btn {
+        background-color: #553100;
+        color: white;
+        padding: 0.75rem;
+        font-size: 1.25rem;
+        border: none;
+        border-radius: 2rem;
+        width: 100%;
+        cursor: pointer;
+      }
+
+      .quantity-section {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .quantity-control {
+        justify-content: center;
+        display: flex;
+        align-items: center;
+        /* border: 1px solid #d3d3d3; */
+        border-radius: 0.5rem;
+        overflow: hidden;
+      }
+
+      .quantity-control button {
+        padding: 0.5rem 1rem;
+        cursor: pointer;
+        background: none;
+        border: none;
+        font-size: 1.25rem;
+      }
+
+      .quantity-display {
+        padding: 0.5rem 1rem;
+        min-width: 3rem;
+        text-align: center;
+        border: 1px solid #d3d3d3;
+        border-radius: 33px;
+      }
+
+      .add-to-cart-btn {
+        border: 2px solid #333;
+        background: none;
+        padding: 0.75rem;
+        text-align: center;
+        cursor: pointer;
+        border-radius: 0.75rem;
+        transition: background-color 0.3s ease;
+        font-size: 1rem;
+      }
+
+      .add-to-cart-btn:hover {
+        background-color: #333;
+        color: white;
+      }
+
+      .handwritten-letter input {
+        width: 100%;
+        padding: 1rem;
+        border-radius: 0.5rem;
+        border: 1px solid #d3d3d3;
+        box-sizing: border-box;
+      }
+
+      .warranty-features {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+        font-size: 0.875rem;
+      }
+
+      .warranty-features p {
+        display: flex;
+        align-items: center;
+        margin: 0;
+      }
+
+      .warranty-features img {
+        margin-right: 0.5rem;
+        width: 24px;
+        height: 24px;
+      }
+@media(max-width: 768px){
+    .product-left {
+          flex-direction: column;
+        }
+
+}
+      /* Responsive Styles */
+      @media (min-width: 768px) {
+        .product-section {
+          flex-direction: row;
+        }
+
+        .product-left,
+        .product-right {
+          flex: 1;
+        }
+
+        .product-left {
+          flex-direction: row-reverse;
+        }
+
+        .thumbs {
+          flex-direction: column;
+          justify-content: flex-start;
+          height: 96%;
+        }
+
+        .navbar ul {
+          display: flex;
+          list-style: none;
+          gap: 1rem;
+        }
+
+        .product-title {
+          font-size: 1.875rem;
+        }
+
+        .buy-now-btn {
+          width: 70%;
+        }
+
+        .quantity-section {
+          flex-direction: row;
+        }
+
+        .add-to-cart-btn {
+          flex-grow: 1;
+        }
+      }
+
+      @media (min-width: 1024px) {
+        .navbar ul li:nth-child(n + 3) {
+          display: block;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <div class="navbar-top">
+      Shipping Pan India | Free delivery on prepaid orders!
+    </div>
+    <nav class="navbar">
+      <div class="navbar-content">
+        <img src="logo.png" alt="company logo" />
+        <ul>
+          <li>Charm Jewellery</li>
+          <li>Shop by Category</li>
+          <li>Rakhi Edit</li>
+          <li>Best Sellers</li>
+          <li>Gifts</li>
+          <li>Shop By Price</li>
+          <li>More</li>
+        </ul>
+        <img
+          src="./Shopping Cart.png"
+          alt="Shopping Cart"
+          class="cart-button"
+        />
+      </div>
+    </nav>
+
+    <!-- Product Section -->
+    <div class="product-section">
+      <!-- Left Side (Images) -->
+      <div class="product-left">
+        <img
+          id="mainImage"
+          src="./image (1).png"
+          class="main-image"
+          alt="Main product image"
+        />
+        <div class="thumbs">
+          <img
+            src="./image.png"
+            class="thumb"
+            onclick="changeImage(this)"
+            alt="Thumbnail 2"
+          />
+          <img
+            src="./image 3.png"
+            class="thumb"
+            onclick="changeImage(this)"
+            alt="Thumbnail 1"
+          />
+          <img
+            src="./image (1).png"
+            class="thumb"
+            onclick="changeImage(this)"
+            alt="Thumbnail 3"
+          />
+        </div>
+      </div>
+
+      <!-- Right Side (Details) -->
+      <div class="product-right">
+        <h2 class="product-title">The Pendant of Love - Opal</h2>
+        <p class="rating">★★★★★</p>
+        <p class="product-details">
+          <img src="trust logo.png" alt="Trust logo" /> MADE WITH PURE 925
+          SILVER
+        </p>
+        <p class="product-description">Anti Tarnish Jewellery</p>
+
+        <!-- Color Selection -->
+        <div class="color-selection">
+          <p>Color</p>
+          <div class="color-options">
+            <button
+              class="color-button"
+              style="background-color: #f59e0b"
+              onclick="selectColor(this)"
+            ></button>
+            <button
+              class="color-button"
+              style="background-color: #9ca3af"
+              onclick="selectColor(this)"
+            ></button>
+          </div>
+        </div>
+
+        <!-- Price -->
+        <div class="price">
+          <span>Rs. 2,999.00</span>
+          <span class="old-price">Rs. 3,999.00</span>
+          <span class="discount-tag">Save 14%</span>
+        </div>
+
+        <!-- Buttons -->
+        <button class="buy-now-btn">Buy It Now</button>
+
+        <!-- Quantity & Add to Cart -->
+        <div class="quantity-section">
+          <div class="quantity-control">
+            <button onclick="changeQuantity(-1)">-</button>
+            <span id="quantity" class="quantity-display">1</span>
+            <button onclick="changeQuantity(1)">+</button>
+          </div>
+          <button class="add-to-cart-btn">Add to cart</button>
+        </div>
+
+        <!-- Optional Handwritten Letter -->
+        <div class="handwritten-letter">
+          <label>Write A Hand-Written Letter (Optional)</label>
+          <input type="text" placeholder="Type here..." />
+        </div>
+
+        <!-- Warranty & Features -->
+        <div class="warranty-features">
+          <p><img src="Vector (2).png" alt="Pure Silver" />Pure 925 Silver</p>
+          <p><img src="Vector (3).png" alt="Warranty" />6 Month Warranty</p>
+          <p><img src="Vector.png" alt="Polish" />High Grade Rhodium Polish</p>
+          <p>
+            <img src="Vector (1).png" alt="Free Shipping" />Free Shipping On All
+            Prepaid Orders
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function changeImage(img) {
+        document.getElementById("mainImage").src = img.src;
+      }
+
+      function selectColor(button) {
+        document
+          .querySelectorAll(".color-button")
+          .forEach((btn) => (btn.style.borderColor = "transparent"));
+        button.style.borderColor = "black";
+      }
+
+      function changeQuantity(amount) {
+        let quantityElement = document.getElementById("quantity");
+        let quantity = parseInt(quantityElement.innerText);
+        if (quantity + amount > 0) {
+          quantityElement.innerText = quantity + amount;
+        }
+      }
+    </script>
+  </body>
+</html>
